@@ -1,0 +1,49 @@
+loadfont unicode
+
+set default="0"
+set timeout=-1
+    
+set color_normal=light-gray/black
+set color_highlight=green/black
+set menu_color_normal=white/black
+set menu_color_highlight=black/light-gray
+
+if background_color 0,0,0; then
+   clear
+fi
+
+# USB pendrive GPT partitions: BOOT, Windows, Linux
+regexp --set usb_pendrive "^(.*?),gpt1" $root
+
+set boot_partition=$root # ="$usb_pendrive,gpt1"
+set windows_partition="$usb_pendrive,gpt2"
+set linux_partition="$usb_pendrive,gpt3"
+
+
+menuentry 'Try or Install Ubuntu MATE 24.04' {
+
+   insmod ntfs
+   set root=$linux_partition
+   set isofile="/boot/iso/ubuntu-mate-24.04.2-desktop-amd64.iso"
+   loopback loop ($root)$isofile
+   linux (loop)/casper/vmlinuz boot=casper layerfs-path=minimal.standard.live.squashfs iso-scan/filename=$isofile
+   initrd (loop)/casper/initrd
+}
+
+menuentry 'Install Windows 11' {
+
+   insmod ntfs
+   set root=$windows_partition
+   chainloader /efi/boot/bootx64.efi
+}
+
+menuentry 'Clonezilla' {
+
+   insmod ntfs
+   set root=$linux_partition
+   set isofile="/boot/iso/clonezilla-live-20241010-oracular-amd64.iso"
+   loopback loop ($root)$isofile
+   linux  (loop)/live/vmlinuz boot=live username=user components noswap noprompt vga=788 keyboard-layouts=en ip=dhcp toram=filesystem.squashfs findiso=$isofile
+   initrd (loop)/live/initrd.img
+}
+

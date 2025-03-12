@@ -6,7 +6,7 @@ So if you have <a href="https://github.com/ventoy/Ventoy/issues/2795">security c
 
 **The method explained here is VERIFIABLY CLEAN (so there are no potential security concerns) as it uses no 3rd-party tools or binary blobs**. All executables are coming directly from the official Linux and Windows installer iso's. No 3rd party executables.
 
-If you're an experienced/advanced Linux or Windows user (e.g. a sysadmin or sysdev), then you can just jump right in and start with the [Method overview](#method-overview) section (which is the TLDR version) to see a quick overview of the steps needed to set up the multi-boot usb stick.
+If you're an experienced/advanced Linux or Windows user (e.g. a sysadmin or sysdev), then you can just jump right in and start with the [Method overview](#method-overview) section (which is the short version) to see a quick overview of the steps needed to set up the multi-boot usb stick.
 
 ## Table of Contents
 - [Introduction](#introduction)
